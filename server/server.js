@@ -2,11 +2,12 @@ const { ApolloServer } = require('apollo-server');
 const gql = require('graphql-tag');
 const mongoose = require('mongoose');
 
+const Post = require('./model/Post')
 const db = require("./config/connection")
 
 const typeDefs = gql`
 type Query {
-    hello: String!
+   getPosts
 }`
 
 const resolvers = {
@@ -22,9 +23,12 @@ const server = new ApolloServer({
 })
 
 db.once("open", ()=>{
+  console.log("Database connection established")
     server.listen( { port: 4000 } ).then(({ url }) => {
         console.log(`🚀 Server ready at ${url}`);
     }); 
 })
+
+
 
 
