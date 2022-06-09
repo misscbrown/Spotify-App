@@ -1,45 +1,30 @@
+const { ApolloServer } = require('apollo-server');
+const gql = require('graphql-tag');
+const mongoose = require('mongoose');
 const express = require('express');
-const { ApolloServer } = require('apollo-server-express');
-const path = require('path');
-const { authMiddleware } = require('./utils/auth')
-
-const { typeDefs, resolvers } = require('./schemas');
-const db = require('./config/connection');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: authMiddleware,
-  
-});
 
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+const { typeDefs, resolvers } = require('./schemas');
 
+const typeDefs = gql`
+type Query {
+    hello: String!
+}`
 
-// if we're in production, serve client/build as static assets
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/build')));
+const resolvers = {
+    Query: {
+        hello: () => 'Hello world!'
+    }
 }
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+
+const server = new ApolloServer({
+    typeDefs,
+    resolvers
+})
+
+server.listen( { port: 4000 } ).then(({ url }) => {
+    console.log(`🚀 Server ready at ${url}`);
 });
-
-
-// Create a new instance of an Apollo server with the GraphQL schema
-const startApolloServer = async (typeDefs, resolvers) => {
-  await server.start();
-  server.applyMiddleware({ app });
-  
-  db.once('open', () => {
-    app.listen(PORT, () => {
-      console.log(`API server running on port ${PORT}!`);
-      console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
-    })
-  })
-  };
-
-startApolloServer(typeDefs, resolvers);
