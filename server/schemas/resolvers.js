@@ -12,11 +12,11 @@ const resolvers = {
                 return posts;
             }
             catch (err) {
-                throw new Error(err); ;
+                throw new Error(err);;
             }
         },
-        async getPost(_, { postId }){
-            try{
+        async getPost(_, { postId }) {
+            try {
                 const post = await Post.findById(postId);
                 if (post) {
                     return post;
@@ -31,22 +31,27 @@ const resolvers = {
         me: async (parent, args, context) => {
             if (context.user) {
                 const userData = await User.findOne({ _id: context.user._id })
-                .select('-__v -password')
+                    .select('-__v -password')
                 return userData;
             }
             throw new AuthenticationError('Not logged in');
         }
     },
 
-Mutation: {
-    addUser: async (parent, args) => {
-        const user = await User.create(args);
-        const token = signToken(user);
+    Mutation: {
+        addUser: async (parent, args) => {
+            const user = await User.create(args);
+            const token = signToken(user);
 
-        return { token, user };
-    },
-   
+            return { token, user };
+        },
+    
+
+    createPost: async (_, { body }, context) => {
+
+    }
 }
+
 };
 
 
