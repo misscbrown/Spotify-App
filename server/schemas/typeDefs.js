@@ -36,11 +36,14 @@ input RegisterInput {
 
 type Query{
     getPosts: [Post]
+    getPost(postId: ID!): Post
 }
 
 type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
+    createPost(body: String!): Post!
+    deletePost(postId: ID!): String!
    
 }
 
