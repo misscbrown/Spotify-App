@@ -15,11 +15,16 @@ const server = new ApolloServer({
     context: ({ req }) => ({ req })
 })
 
-db.once("open", ()=>{
-  console.log("Database connection established")
-    server.listen( { port: 4000 } ).then(({ url }) => {
-        console.log(`🚀 Server ready at ${url}`);
-    }); 
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../client/build')));
+}
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/'));
+})
+
 })
 
 
