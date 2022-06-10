@@ -1,6 +1,7 @@
 const { User, Post } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
+const checkAuth = require("../../server/utils/auth")
 
 const resolvers = {
 
@@ -47,7 +48,21 @@ const resolvers = {
         },
     
 
-    createPost: async (_, { body }, context) => {
+        createPost: async (_, { body }, context) => {
+            const user = checkAuth(context);
+            console.log(user);
+
+            const newPost = new Post({
+                body,
+                user: user.id,
+                username: user.username,
+                createdAt: new Date().toISOString()
+            });
+            
+            const post = await newPost.save();
+
+            return post;
+
 
     }
 }
