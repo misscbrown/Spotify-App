@@ -1,6 +1,7 @@
 const { ApolloServer } = require('apollo-server');
 const gql = require('graphql-tag');
-const mongoose = require('mongoose');
+const {authMiddleware} = require('./utils/auth')
+const express = require('express')
 
 const { typeDefs, resolvers } = require('./schemas');
 
