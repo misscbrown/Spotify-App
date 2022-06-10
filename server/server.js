@@ -6,12 +6,10 @@ const { typeDefs, resolvers } = require('./schemas');
 
 const db = require("./config/connection")
 
-
-
-
 const server = new ApolloServer({
     typeDefs,
-    resolvers
+    resolvers,
+    context: ({ req }) => ({ req })
 })
 
 db.once("open", ()=>{
