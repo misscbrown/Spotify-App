@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const secret = 'mysecretsshhhhh';
 const expiration = '2h';
 //secret key 
-// const { SECRET_KEY } = require('../config')
+// const { SECRET_KEY } = process.env.SECRET_KEY;
 
 module.exports = (context) => {
   const authHeader = context.req.headers.authorization;
@@ -14,7 +14,7 @@ module.exports = (context) => {
     const token = authHeader.split('Bearer ')[1];
     if (token) {
       try {
-        const user = jwt.verify(token, SECRET_KEY);
+        const user = jwt.verify(token, secret);
         return user;
       } catch (err) {
         throw new AuthenticationError('Invalid/Expired token');
