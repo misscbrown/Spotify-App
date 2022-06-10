@@ -1,7 +1,8 @@
 const { User, Post } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
-const checkAuth  = require("../../server/utils/auth")
+
+
 
 const resolvers = {
 
@@ -64,10 +65,23 @@ const resolvers = {
             return post;
 
 
-    }
-}
+    },
 
-};
+          deletePost: async (_, { postId }, context) => {
+          const user = checkAuth(context);
+          console.log(user);
 
+          try {
+              const post = await Post.findById(postId);
+              if(user.username === post.username){
+                  await post.findByIdandDelete(postId);
+                  return 'Post deleted sucessfully';
+              } 
+                  throw new AuthenticationError("You are not autherised to delete post")
+              
+            }
+        
+        
+    },}
 
 module.exports = resolvers;
