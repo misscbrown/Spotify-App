@@ -45,8 +45,18 @@ const resolvers = {
 
       return { token, user };
     },
-    login: async (_, { email, password }) => {
-      return null;
+      login: async (_, { email, password }) => {
+          
+        const user = await User.findOne( { email });
+        if (!user) {
+            throw new AuthenticationError('Incorrect Username/password')
+        }
+        const correctPw = await user.isCorrectPassword(password);
+        if(!correctPw) {
+            throw new AuthenticationError('Username/password')
+        }
+        const token = signToken(user);
+        return { token, user };;
     },
 
     //     createPost: async (_, { body }, context) => {
