@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../utils/mutations";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Auth from "../utils/auth";
 import Dashboard from "../pages/Dashboard";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const [userFormData, setUserFormData] = useState({
     email: "",
     password: "",
   });
 
   const [login, { error }] = useMutation(LOGIN_USER);
-
-  const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
   const handleInputChange = (event) => {
@@ -37,6 +36,8 @@ const LoginForm = () => {
         });
 
         Auth.login(data.login.token);
+
+        navigate("/dashboard");
       } catch (e) {
         console.error(e);
         setShowAlert(true);
@@ -54,37 +55,31 @@ const LoginForm = () => {
         <div className="card">
           <h4 className="card-header bg-dark text-light p-2">Login</h4>
           <div className="card-body">
-            {!login ? (
-              <p>
-                Success! You may now head <Link to="/">{<Dashboard />}</Link>
-              </p>
-            ) : (
-              <form onSubmit={handleFormSubmit}>
-                <input
-                  className="form-input"
-                  placeholder="Your email"
-                  name="email"
-                  type="email"
-                  value={setUserFormData.email}
-                  onChange={handleInputChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="******"
-                  name="password"
-                  type="password"
-                  value={setUserFormData.password}
-                  onChange={handleInputChange}
-                />
-                <button
-                  className="btn btn-block btn-primary"
-                  style={{ cursor: "pointer" }}
-                  type="submit"
-                >
-                  Submit
-                </button>
-              </form>
-            )}
+            <form onSubmit={handleFormSubmit}>
+              <input
+                className="form-input"
+                placeholder="Your email"
+                name="email"
+                type="email"
+                value={setUserFormData.email}
+                onChange={handleInputChange}
+              />
+              <input
+                className="form-input"
+                placeholder="******"
+                name="password"
+                type="password"
+                value={setUserFormData.password}
+                onChange={handleInputChange}
+              />
+              <button
+                className="btn btn-block btn-primary"
+                style={{ cursor: "pointer" }}
+                type="submit"
+              >
+                Submit
+              </button>
+            </form>
 
             {error && (
               <div className="my-3 p-3 bg-danger text-white">
