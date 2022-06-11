@@ -17,6 +17,14 @@ type Post {
     createdAt: String
 }
 
+type Reply {
+    id: ID
+    body: String
+    username: String
+    createdAt: String
+}
+
+
 type Query {
     me: User
 }
@@ -25,6 +33,8 @@ type Auth {
     token: ID!
     user: User
 }
+
+
 
 input RegisterInput {
     username: String!
