@@ -65,11 +65,11 @@ const PostSchema = new Schema(
 );
 
 // get total count of reactions
-PostSchema.virtual("reactionCount").get(function () {
-  return this.reactions.length;
+PostSchema.virtual("replyCount").get(function () {
+  return this.reply.length;
 });
 
 // create the Thoughts model using the Thoughts Schema
-const Post = model("Thoughts", PostSchema);
+const Post = model("Post", PostSchema);
 
 module.exports = Post;
