@@ -9,6 +9,8 @@ import { setContext } from "@apollo/client/link/context";
 import Dashboard from "./pages/Dashboard";
 import AllPost from "./pages/AllPost";
 import Navbar from "./components/Navbar";
+import Homepage from "./pages/Homepage";
+// import Header from "./components/Header"
 
 import "./App.css";
 import LoginForm from "./components/LoginForm";
@@ -17,7 +19,6 @@ import SignupForm from "./components/SignupForm";
 const httpLink = createHttpLink({
   uri: "/graphql",
 });
-
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem("id_token");
@@ -41,11 +42,13 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/" element={<Homepage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/allPosts" element={<AllPost />} />
 
-          <Route path="/SignupForm" element={<SignupForm />} />
-          <Route path="/LoginForm" element={<LoginForm />} />
+          <Route path="/signup" element={<SignupForm />} />
+          <Route path="/login" element={<LoginForm />} />
+
           <Route
             path="*"
             element={<h1 className="display-2">Wrong page!</h1>}
