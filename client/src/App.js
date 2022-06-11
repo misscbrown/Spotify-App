@@ -1,29 +1,31 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client'
-import { setContext } from '@apollo/client/link/context';
-import Dashboard from './pages/Dashboard';
-import AllPost from './pages/AllPost';
-import Navbar from './components/Navbar';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+import Dashboard from "./pages/Dashboard";
+import AllPost from "./pages/AllPost";
+import Navbar from "./components/Navbar";
 
-import './App.css';
-import LoginForm from './components/LoginForm';
-import SignupForm from './components/SignupForm';
-
+import "./App.css";
+import LoginForm from "./components/LoginForm";
+import SignupForm from "./components/SignupForm";
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
-  
+  uri: "/graphql",
 });
 
-const authLink = setContext((_, { headers }) => {
 
-  const token = localStorage.getItem('id_token');
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem("id_token");
 
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
-      
+      authorization: token ? `Bearer ${token}` : "",
     },
   };
 });
@@ -36,31 +38,20 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-    <Router>
+      <Router>
         <Navbar />
         <Routes>
-          <Route 
-            path='/' 
-            element={<Dashboard />} 
-          />
-          <Route 
-            path='/allPosts' 
-            element={<AllPost />} 
-          />
-          <Route 
-            path='*'
-            element={<h1 className='display-2'>Wrong page!</h1>}
-          />
-           <Route 
-            path='/SignupForm'
-            element={<SignupForm />}
-          />
-           <Route 
-            path='/LoginForm'
-            element={<LoginForm />}
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/allPosts" element={<AllPost />} />
+
+          <Route path="/SignupForm" element={<SignupForm />} />
+          <Route path="/LoginForm" element={<LoginForm />} />
+          <Route
+            path="*"
+            element={<h1 className="display-2">Wrong page!</h1>}
           />
         </Routes>
-    </Router>
+      </Router>
     </ApolloProvider>
   );
 }
