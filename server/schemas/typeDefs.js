@@ -5,9 +5,9 @@ const typeDefs = gql`
 type User {
     _id: ID!
     username: String!
-    email: String
-    createdAt: String
-
+    email: String!
+    image: String
+    bio: String
 }
 
 type Post {
