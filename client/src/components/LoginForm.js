@@ -1,53 +1,51 @@
-import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { LOGIN_USER } from '../utils/mutations';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { LOGIN_USER } from "../utils/mutations";
+import { Link } from "react-router-dom";
 
-import Auth from '../utils/auth';
-import Dashboard from '../pages/Dashboard';
+import Auth from "../utils/auth";
+import Dashboard from "../pages/Dashboard";
 
 const LoginForm = () => {
-    const [userFormData, setUserFormData] = useState({ 
-        email: '', password: '' });
-        const [login, { error }] = useMutation(LOGIN_USER);
-        
-        
-        const [validated] = useState(false);
-        const [showAlert, setShowAlert] = useState(false);
-      
-        const handleInputChange = (event) => {
-          const { name, value } = event.target;
-      
-          setUserFormData({ 
-            ...userFormData, 
-            [name]: value,
-           });
-        };
+  const [userFormData, setUserFormData] = useState({
+    email: "",
+    password: "",
+  });
 
+  const [login, { error }] = useMutation(LOGIN_USER);
 
-    
+  const [validated] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+
+    setUserFormData({
+      ...userFormData,
+      [name]: value,
+    });
+  };
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
 
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    try {
-      const { data } = await login({
-        variables: { ...userFormData },
-      });
+    if (form.checkValidity()) {
+      try {
+        const { data } = await login({
+          variables: { ...userFormData },
+        });
 
-      Auth.login(data.login.token);
-    } catch (e) {
-      console.error(e);
-      setShowAlert(true);
+        Auth.login(data.login.token);
+      } catch (e) {
+        console.error(e);
+        setShowAlert(true);
+      }
+      setUserFormData({
+        email: "",
+        password: "",
+      });
     }
-    setUserFormData({
-      email: '',
-      password: '',
-    });
   };
 
   return (
@@ -58,8 +56,7 @@ const LoginForm = () => {
           <div className="card-body">
             {!login ? (
               <p>
-                Success! You may now head{' '}
-                <Link to="/">{<Dashboard/>}</Link>
+                Success! You may now head <Link to="/">{<Dashboard />}</Link>
               </p>
             ) : (
               <form onSubmit={handleFormSubmit}>
@@ -81,7 +78,7 @@ const LoginForm = () => {
                 />
                 <button
                   className="btn btn-block btn-primary"
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: "pointer" }}
                   type="submit"
                 >
                   Submit
@@ -98,11 +95,7 @@ const LoginForm = () => {
         </div>
       </div>
     </main>
-  )
-
-    
-
-
+  );
 };
 
 export default LoginForm;
