@@ -1,30 +1,75 @@
 const { model, Schema } = require("mongoose");
+const moment = require("moment");
 
-const postSchema = new Schema({
-    body: String,
-    username: String,
-    createdAt: String,
-    comments: [
-        {
-            body: String,
-            username: String,
-            createdAt: String,
-        }
-    ],
-    likes: [
-        {
-            username: String,
-            createdAt: String,
-            
-        }
-    ],
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: 'users'
-    }
+// RepliesSchema
+const ReplySchema = new Schema(
+  {
+    // Set custom ID
+    replyId: {
+      type: Schema.Types.ObjectId,
+      default: () => new Types.ObjectId(),
+    },
+    replyBody: {
+      type: String,
+      required: true,
+      maxlength: 280,
+    },
+    username: {
+      type: String,
+      required: true,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      get: (createdAtVal) =>
+        moment(createdAtVal).format("MMM DD, YYYY [at] hh:mm a"),
+    },
+  },
+  {
+    toJSON: {
+      getters: true,
+    },
+  }
+);
 
+// PostSchema
+const PostSchema = new Schema(
+  {
+    postText: {
+      type: String,
+      required: true,
+      minlength: 1,
+      maxlength: 280,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      // Moment
+      get: (createdAtVal) =>
+        moment(createdAtVal).format("MMM DD, YYYY [at] hh:mm a"),
+    },
+    username: {
+      type: String,
+      required: true,
+    },
+    // Use ReactionsSchema to validate data
+    replies: [ReplySchema],
+  },
+  {
+    toJSON: {
+      virtuals: true,
+      getters: true,
+    },
+    id: false,
+  }
+);
+
+// get total count of reactions
+PostSchema.virtual("reactionCount").get(function () {
+  return this.reactions.length;
 });
 
-const Post = model('Post', postSchema);
+// create the Thoughts model using the Thoughts Schema
+const Post = model("Thoughts", PostSchema);
 
 module.exports = Post;
