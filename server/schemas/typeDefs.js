@@ -14,19 +14,14 @@ const typeDefs = gql`
     postText: String
     username: String
     createdAt: String
-    replies: [Reply]
+    comments: [Comment]!
   }
 
-  type Reply {
-    replyId: ID
-    replyBody: String!
-    username: String!
+  type Comment {
+    _id: ID
+    commentText: String
+    username: String
     createdAt: String
-  }
-
-  type Query {
-    me: User
-    getPosts: [Post]
   }
 
   type Auth {
@@ -34,26 +29,28 @@ const typeDefs = gql`
     user: User
   }
 
-  input RegisterInput {
-    username: String!
-    password: String!
-    confirmPassword: String!
-    email: String!
-  }
-
   type Query {
+    users: [User]
+    user(username: String!): User
+    posts(username: String): [Post]
+    post(postId: ID!): Post
+    me: User
     getPosts: [Post]
-    getPost(postId: ID!): Post
   }
 
   type Mutation {
-    login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    createPost(postText: String!, username: String!): Post
-    createReply(replyBody: String!, username: String!, postId: ID!): Reply
-    deletePost(postId: ID!): String!
-    userBio(bio: String, username: String!): User
+    login(email: String!, password: String!): Auth
+    addPost(postText: String!, username: String!): Post
+    addComment(
+      postId: ID!
+      commentText: String!
+      username: String!
+    ): Post
+    removePost(postId: ID!): Post
+    removeComment(postId: ID!, commentId: ID!): Post
   }
+
 `;
 
 module.exports = typeDefs;
