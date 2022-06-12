@@ -67,24 +67,68 @@ const resolvers = {
 
       return { token, user };
     },
-    createPost: async (_, { postText, username }) => {
+
+    addPost: async (parent, { postText,username }) => {
       const post = await Post.create({ postText, username });
 
       await User.findOneAndUpdate(
-        {username: username},
-        {$addToSet: {posts: post.id}}
-      )
+        { username: username },
+        { $addToSet: { posts: post._id } }
+      );
+
       return post;
     },
-    createReply: async (parent, { replyBody, username, postId }) => {
-      return Post.findByIdAndUpdate(
+
+    addComment: async (parent, { postId, commentText, username }) => {
+      return Post.findOneAndUpdate(
         { _id: postId },
-        { $addToSet: { Reply: { replyBody, username } } },
-        { new: true,
-        runValidators: true }
+        {
+          $addToSet: { comments: { commentText, username } },
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
       );
-      return reply;
-    }
+    },
+
+    removePost: async (parent, { postId }) => {
+      return Post.findOneAndDelete({ _id: postId });
+    },
+    removeComment: async (parent, { postId, commentId }) => {
+      return Post.findOneAndUpdate(
+        { _id: postId },
+        { $pull: { comments: { _id: commentId } } },
+        { new: true }
+      );
+    },
+
+
+
+
+
+
+
+
+
+    // createPost: async (_, { postText, username }) => {
+    //   const post = await Post.create({ postText, username });
+
+    //   await User.findOneAndUpdate(
+    //     {username: username},
+    //     {$addToSet: {posts: post.id}}
+    //   )
+    //   return post;
+    // },
+    // createReply: async (parent, { replyBody, username, postId }) => {
+    //   return Post.findByIdAndUpdate(
+    //     { _id: postId },
+    //     { $addToSet: { Reply: { replyBody, username } } },
+    //     { new: true,
+    //     runValidators: true }
+    //   );
+    //   return reply;
+    // }
 
 
     //     createPost: async (_, { body }, context) => {
