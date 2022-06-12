@@ -1,10 +1,10 @@
 const { model, Schema } = require("mongoose");
-const moment = require("moment");
+const dateFormat = require("../utils/dateFormat");
 
 const postSchema = new Schema({
   postText: {
     type: String,
-    required: 'You need to leave a thought!',
+    required: "You need to leave a thought!",
     minlength: 1,
     maxlength: 280,
     trim: true,
@@ -34,17 +34,15 @@ const postSchema = new Schema({
       createdAt: {
         type: Date,
         default: Date.now,
-        get: (createdAtVal) =>
-        moment(createdAtVal).format("MMM DD, YYYY [at] hh:mm a"),
+        get: (timestamp) => dateFormat(timestamp),
       },
     },
   ],
 });
 
-const Post = model('Post', postSchema);
+const Post = model("Post", postSchema);
 
 module.exports = Post;
-
 
 // RepliesSchema
 // const ReplySchema = new Schema(
