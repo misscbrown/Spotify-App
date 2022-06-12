@@ -13,12 +13,15 @@ const resolvers = {
       }
       throw new AuthenticationError("Not logged in");
     },
-    getPosts: async (parent, args, context) => {
-      const posts = await Post.find({}).sort({ createdAt: -1 });
-      return posts;
-    }
 
+    userPost: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return Post.find(params).sort({ createdAt: -1 });
+    },
 
+    getAllPosts: async () => {
+      return await Post.find({}).sort({});
+    },
     // // @Check code
     // getPosts: async () => {
     //     try {
@@ -68,7 +71,7 @@ const resolvers = {
       return { token, user };
     },
 
-    addPost: async (parent, { postText,username }) => {
+    addPost: async (parent, { postText, username }) => {
       const post = await Post.create({ postText, username });
 
       await User.findOneAndUpdate(
@@ -103,14 +106,6 @@ const resolvers = {
       );
     },
 
-
-
-
-
-
-
-
-
     // createPost: async (_, { postText, username }) => {
     //   const post = await Post.create({ postText, username });
 
@@ -129,7 +124,6 @@ const resolvers = {
     //   );
     //   return reply;
     // }
-
 
     //     createPost: async (_, { body }, context) => {
     //         const user = checkAuth(context);
