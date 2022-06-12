@@ -10,21 +10,23 @@ const typeDefs = gql`
   }
 
   type Post {
-    id: ID
-    body: String
+    _id: ID
+    postText: String
     username: String
     createdAt: String
+    replies: [Reply]
   }
 
   type Reply {
-    id: ID
-    body: String
-    username: String
+    replyId: ID
+    replyBody: String!
+    username: String!
     createdAt: String
   }
 
   type Query {
     me: User
+    getPosts: [Post]
   }
 
   type Auth {
@@ -47,8 +49,10 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    createPost(body: String!): Post!
+    createPost(postText: String!, username: String!): Post
+    createReply(replyBody: String!, username: String!, postId: ID!): Reply
     deletePost(postId: ID!): String!
+    userBio(bio: String, username: String!): User
   }
 `;
 
