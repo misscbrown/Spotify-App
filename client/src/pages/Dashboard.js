@@ -1,11 +1,9 @@
-import React from 'react'
+import React from "react";
+import { Link } from "react-router-dom";
 
-function Dashboard() {
-  return (
-    <div>
-      DASHBOARD
-    </div>
-  )
-}
+import Auth from "../utils/auth.js";
 
-export default Dashboard
+const Dashboard = () => {
+  return <div>DASBOARD</div>;
+};
+export default Dashboard;
