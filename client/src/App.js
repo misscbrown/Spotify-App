@@ -10,7 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import AllPost from "./pages/AllPost";
 import Navbar from "./components/Navbar";
 import Homepage from "./pages/Homepage";
-// import Header from "./components/Header"
+import Header from "./components/Header";
 
 import "./App.css";
 import LoginForm from "./components/LoginForm";
@@ -40,9 +40,10 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
+        <Header />
         <Navbar />
         <Routes>
-          <Route path="/" element={<Homepage />} />
+          <Route path="/homepage" element={<Homepage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/allPosts" element={<AllPost />} />
 
