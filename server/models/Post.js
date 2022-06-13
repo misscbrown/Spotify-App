@@ -4,7 +4,7 @@ const dateFormat = require("../utils/dateFormat");
 const postSchema = new Schema({
   postText: {
     type: String,
-    required: "You need to leave a thought!",
+    required: "Post text is required",
     minlength: 1,
     maxlength: 280,
     trim: true,
@@ -112,7 +112,7 @@ module.exports = Post;
 //   return this.reply.length;
 // });
 
-// // create the Thoughts model using the Thoughts Schema
+// // create the posts model using the posts Schema
 // const Post = model("Post", PostSchema);
 
 // module.exports = Post;
