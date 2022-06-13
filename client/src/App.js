@@ -42,6 +42,10 @@ function App() {
       <Router>
         <Header />
         <Navbar />
+        <h2 className="text-8xl  text-orange font-bold underline">
+          {" "}
+          Hello world!
+        </h2>
         <Routes>
           <Route path="/homepage" element={<Homepage />} />
           <Route path="/dashboard" element={<Dashboard />} />
