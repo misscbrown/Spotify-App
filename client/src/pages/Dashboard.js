@@ -4,6 +4,6 @@ import { Link } from "react-router-dom";
 import Auth from "../utils/auth.js";
 
 const Dashboard = () => {
-  return <div>DASBOARD</div>;
+  return <div>DASHBOARD</div>;
 };
 export default Dashboard;
