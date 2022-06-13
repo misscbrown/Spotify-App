@@ -17,12 +17,12 @@ export const QUERY_USER = gql`
 
 export const QUERY_POSTS = gql`
   query getAllPosts {
-    posts {
+    post {
       _id
       postText
       username
       createdAt
-      Comment {
+      comments {
         _id
         commentText
         username
