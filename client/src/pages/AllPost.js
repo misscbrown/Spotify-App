@@ -15,27 +15,7 @@ const AllPost = () => {
 
   const [characterCount, setCharacterCount] = useState(0);
 
-  const [addPost, { error }] = useMutation(ADD_POST, {
-    update(cache, { data: { addPost } }) {
-      try {
-        const { posts } = cache.readQuery({ query: QUERY_POSTS });
-
-        cache.writeQuery({
-          query: QUERY_POSTS,
-          data: { posts: [addPost, ...posts] },
-        });
-      } catch (e) {
-        console.error(e);
-      }
-
-      // update me object's cache
-      const { me } = cache.readQuery({ query: QUERY_ME });
-      cache.writeQuery({
-        query: QUERY_ME,
-        data: { me: { ...me, posts: [...me.posts, addPost] } },
-      });
-    },
-  });
+  const [addPost, { error }] = useMutation(ADD_POST);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
