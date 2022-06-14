@@ -16,6 +16,7 @@ import Header from "./components/Header";
 
 import "./App.css";
 import "./App.js";
+import "./index.css";
 import LoginForm from "./components/LoginForm";
 import SignupForm from "./components/SignupForm";
 
