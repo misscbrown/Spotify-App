@@ -71,7 +71,12 @@ const resolvers = {
       return { token, user };
     },
 
-    addPost: async (parent, { postText, username }) => {
+    addPost: async (_, { postText }, context) => {
+      if (!context.user) {
+        throw new AuthenticationError("Not logged in");
+      }
+      const { username } = context.user;
+
       const post = await Post.create({ postText, username });
 
       await User.findOneAndUpdate(
@@ -82,8 +87,14 @@ const resolvers = {
       return post;
     },
 
-    addComment: async (parent, { postId, commentText, username }) => {
-      return Post.findOneAndUpdate(
+    addComment: async (_, { postId, commentText }, context) => {
+      if (!context.user) {
+        throw new AuthenticationError("Not logged in");
+      }
+
+      const { username } = context.user;
+
+      return await Post.findOneAndUpdate(
         { _id: postId },
         {
           $addToSet: { comments: { commentText, username } },

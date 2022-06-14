@@ -1,21 +1,23 @@
 import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
+import { Link } from "react-router-dom";
+import { useMutation } from "@apollo/client";
 
-import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
-
-import { ADD_POST } from '../utils/mutations';
-import { QUERY_POSTS, QUERY_ME } from '../utils/queries';
-
-import Auth from '../utils/auth.js';
+import { ADD_POST } from "../utils/mutations";
+import { QUERY_ALL_POSTS } from "../utils/queries";
+import Auth from "../utils/auth.js";
+import PostCard from "../components/PostCard";
 
 const AllPost = () => {
-
-  const [postText, setpostText] = useState('');
+  const [postText, setpostText] = useState("");
 
   const [characterCount, setCharacterCount] = useState(0);
 
   const [addPost, { error }] = useMutation(ADD_POST);
+
+  const { data, loading } = useQuery(QUERY_ALL_POSTS);
+
+  console.log("data", data);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -28,7 +30,7 @@ const AllPost = () => {
         },
       });
 
-      setpostText('');
+      setpostText("");
     } catch (err) {
       console.error(err);
     }
@@ -37,7 +39,7 @@ const AllPost = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === 'postText' && value.length <= 280) {
+    if (name === "postText" && value.length <= 280) {
       setpostText(value);
       setCharacterCount(value.length);
     }
@@ -45,13 +47,11 @@ const AllPost = () => {
 
   return (
     <div>
-     
-
       {Auth.loggedIn() ? (
         <>
           <p
             className={`m-0 ${
-              characterCount === 280 || error ? 'text-danger' : ''
+              characterCount === 280 || error ? "text-danger" : ""
             }`}
           >
             Character Count: {characterCount}/280
@@ -66,7 +66,7 @@ const AllPost = () => {
                 placeholder="Here's a new post..."
                 value={postText}
                 className="form-input w-100"
-                style={{ lineHeight: '1.5', resize: 'vertical' }}
+                style={{ lineHeight: "1.5", resize: "vertical" }}
                 onChange={handleChange}
               ></textarea>
             </div>
@@ -85,10 +85,11 @@ const AllPost = () => {
         </>
       ) : (
         <p>
-          Please login{' '}
-          <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
+          Please login <Link to="/login">login</Link> or{" "}
+          <Link to="/signup">signup.</Link>
         </p>
       )}
+      {data && data.getAllPosts.map((post) => <PostCard post={post} />)}
     </div>
   );
 };

@@ -15,9 +15,9 @@ export const QUERY_USER = gql`
   }
 `;
 
-export const QUERY_POSTS = gql`
-  query getAllPosts {
-    post {
+export const QUERY_ALL_POSTS = gql`
+  query GetAllPosts {
+    getAllPosts {
       _id
       postText
       username
