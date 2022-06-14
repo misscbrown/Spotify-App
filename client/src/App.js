@@ -6,6 +6,8 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import Dashboard from "./pages/Dashboard";
 import AllPost from "./pages/AllPost";
 import Navbar from "./components/Navbar";
@@ -13,6 +15,7 @@ import Homepage from "./pages/Homepage";
 import Header from "./components/Header";
 
 import "./App.css";
+import "./App.js";
 import LoginForm from "./components/LoginForm";
 import SignupForm from "./components/SignupForm";
 
@@ -42,10 +45,7 @@ function App() {
       <Router>
         <Header />
         <Navbar />
-        <h2 className="text-8xl  text-orange font-bold underline">
-          {" "}
-          Hello world!
-        </h2>
+
         <Routes>
           <Route path="/homepage" element={<Homepage />} />
           <Route path="/dashboard" element={<Dashboard />} />
@@ -53,11 +53,11 @@ function App() {
 
           <Route path="/signup" element={<SignupForm />} />
           <Route path="/login" element={<LoginForm />} />
-
+          {/* 
           <Route
             path="*"
             element={<h1 className="display-2">Wrong page!</h1>}
-          />
+          /> */}
         </Routes>
       </Router>
     </ApolloProvider>
