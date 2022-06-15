@@ -15,6 +15,7 @@ const PostForm = () => {
   const [addPost, { error }] = useMutation(ADD_POST, {
     update(cache, { data: { addPost } }) {
       try {
+        debugger
         const { posts } = cache.readQuery({ query: QUERY_POSTS });
 
         cache.writeQuery({
@@ -41,7 +42,6 @@ const PostForm = () => {
       const { data } = await addPost({
         variables: {
           postText,
-          username: Auth.getProfile().data.username,
         },
       });
 
