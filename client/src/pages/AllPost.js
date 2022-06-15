@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 
 import { ADD_POST } from "../utils/mutations";
-import { QUERY_ALL_POSTS } from "../utils/queries";
+import { QUERY_ALL_POSTS, QUERY_ME } from "../utils/queries";
 import Auth from "../utils/auth.js";
 import PostCard from "../components/PostCard";
 
@@ -13,7 +13,31 @@ const AllPost = () => {
 
   const [characterCount, setCharacterCount] = useState(0);
 
-  const [addPost, { error }] = useMutation(ADD_POST);
+  const [addPost, { error }] = useMutation(ADD_POST, {
+    update(cache, { data: { addPost } }) {
+      try {
+        const allPostsCacheRead = cache.readQuery({ query: QUERY_ALL_POSTS });
+
+        const { getAllPosts } = allPostsCacheRead;
+
+        cache.writeQuery({
+          query: QUERY_ALL_POSTS,
+          data: { getAllPosts: [addPost, ...getAllPosts] },
+        });
+      } catch (e) {
+        console.error(e);
+      }
+
+      // // update me object's cache
+      // const meCacheRead = cache.readQuery({ query: QUERY_ME });
+
+      // const { me } = meCacheRead;
+      // cache.writeQuery({
+      //   query: QUERY_ME,
+      //   data: { me: { ...me, posts: [...me.posts, addPost] } },
+      // });
+    },
+  });
 
   const { data, loading } = useQuery(QUERY_ALL_POSTS);
 
@@ -26,7 +50,6 @@ const AllPost = () => {
       const { data } = await addPost({
         variables: {
           postText,
-          username: Auth.getProfile().data.username,
         },
       });
 
