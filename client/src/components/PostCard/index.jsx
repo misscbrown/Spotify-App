@@ -1,4 +1,19 @@
+import { useMutation } from "@apollo/client";
+import { ADD_COMMENT } from "../../utils/mutations";
+
 const PostCard = ({ post }) => {
+  const [comment, setComment] = useState("");
+  const [addComment, { loading }] = useMutation(ADD_COMMENT);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    addComment({
+      postId: post._id,
+      commentText: comment,
+    });
+  };
+
   //use tailwind to display the post and the comments, as well as an input field to add a new comment
   return (
     <section className="border border-solid border-black my-2">
@@ -21,13 +36,16 @@ const PostCard = ({ post }) => {
           </p>
         ))}
       </aside>
-      <form className="flex flex-col">
+      <form className="flex flex-col" onSubmit={handleSubmit}>
         <input
           className="border border-solid border-black"
           type="text"
           placeholder="Add a comment"
         />
         <button
+          disabled={loading}
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
           type="submit"
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
