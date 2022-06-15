@@ -1,5 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { ADD_COMMENT } from "../../utils/mutations";
+import { useState } from "react"
 
 const PostCard = ({ post }) => {
   const [comment, setComment] = useState("");
