@@ -153,20 +153,23 @@ const resolvers = {
 
     // },
 
-    //       deletePost: async (_, { postId }, context) => {
-    //       const user = checkAuth(context);
-    //       console.log(user);
+          // deletePost: async (_, { postId }, context) => {
+          // const user = checkAuth(context);
+          // console.log(user);
 
-    //       try {
-    //           const post = await Post.findById(postId);
-    //           if(user.username === post.username){
-    //               await post.findByIdandDelete(postId);
-    //               return 'Post deleted sucessfully';
-    //           }
-    //               throw new AuthenticationError("You are not autherised to delete post")
+          // try {
+          //     const post = await Post.findById(postId);
+          //     if(user.username === post.username){
+          //         await post.findByIdandDelete(postId);
+          //         return 'Post deleted sucessfully';
+          //     }
+          //         throw new AuthenticationError("You are not autherised to delete post")
 
-    //         }
+          // }
+            
   },
 };
 
 module.exports = resolvers;
+
+
