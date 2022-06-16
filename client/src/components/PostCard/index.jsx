@@ -1,6 +1,7 @@
 import { useMutation } from "@apollo/client";
 import { ADD_COMMENT } from "../../utils/mutations";
-import { useState } from "react"
+import { useState } from "react";
+import Spotify from "../Spotify";
 
 const PostCard = ({ post }) => {
   const [comment, setComment] = useState("");
@@ -23,6 +24,7 @@ const PostCard = ({ post }) => {
         {post.username}
         <p className="text-gray-300 text-sm">at: {post.createdAt} </p>
       </h4>
+      <Spotify link={post.postText} />
       <main>{post.postText}</main>
       <aside>
         <h5 className="text-gray-500 text-xl">Comments:</h5>
