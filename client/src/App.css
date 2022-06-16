@@ -45,9 +45,9 @@
 }
 
 
-a {
+/* a {
   color: var(--text);
-}
+} */
 
 .navigation {
   display: flex;
@@ -57,8 +57,8 @@ a {
 
 /* Set a style for all buttons */
 .submit-btn {
-  background-color: var(--clr-accent);
-  color: white;
+  
+  
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
