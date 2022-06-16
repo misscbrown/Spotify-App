@@ -53,22 +53,21 @@ const LoginForm = () => {
   return (
     <main className="flex-row justify-center mb-4">                      
       <div className="relative py-16
-        before:absolute before:inset-0 before:w-full before:h-[50%] before:bg-black">
+        before:absolute before:inset-0 before:w-full before:h-[70%] before:bg-black">
         <div className="relative container m-auto px-6 text-gray-500 md:px-12 xl:px-40">
           <div class="rounded-xl border bg-opacity-50 backdrop-blur-2xl bg-white shadow-xl">
           <div class="p-6 sm:p-16"><h2 class="mb-8 text-2xl text-cyan-900 font-bold">Login in to your account</h2>
-        <div className="">
-          <div className="card-body">
-                  <form className="space-y-8" onSubmit={handleFormSubmit}>
-                   
-                    <input     
+          <div className="">
+            <div className="card-body">
+            <form className="space-y-8" onSubmit={handleFormSubmit}>                  
+                <input     
                 className="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
                 focus:ring-2 focus:ring-sky-300 focus:outline-none
                 invalid:ring-2 invalid:ring-red-400"
                 placeholder="Your email"
                 name="email"
                 type="email"
-                      
+   
                 value={setUserFormData.email}
                 onChange={handleInputChange}
               />
