@@ -20,6 +20,8 @@ import "./index.css";
 import LoginForm from "./components/LoginForm";
 import SignupForm from "./components/SignupForm";
 
+import Spotify from "./components/Spotify";
+
 const httpLink = createHttpLink({
   uri: "/graphql",
 });
@@ -48,7 +50,7 @@ function App() {
         <Navbar />
 
         <Routes>
-          <Route path="/homepage" element={<Homepage />} />
+          <Route path="/" element={<Homepage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/allPosts" element={<AllPost />} />
 
