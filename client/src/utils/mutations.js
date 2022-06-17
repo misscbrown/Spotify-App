@@ -27,6 +27,7 @@ export const ADD_USER = gql`
   }
 `;
 
+// ADD_POST will execute the addPost mutation.
 export const ADD_POST = gql`
   mutation addPost($postText: String!) {
     addPost(postText: $postText) {
@@ -42,6 +43,7 @@ export const ADD_POST = gql`
   }
 `;
 
+// ADD_COMMENT will execute the addComment mutation.
 export const ADD_COMMENT = gql`
   mutation ADD_COMMENT($postId: ID!, $commentText: String!) {
     addComment(postId: $postId, commentText: $commentText) {
@@ -52,6 +54,17 @@ export const ADD_COMMENT = gql`
         username
         createdAt
       }
+    }
+  }
+`;
+
+// DELETE_POST will execute the removePost mutation.
+export const DELETE_POST = gql`
+  mutation DELETE_POST($postId: ID!) {
+    removePost(postId: $postId) {
+      _id
+      postText
+      username
     }
   }
 `;
