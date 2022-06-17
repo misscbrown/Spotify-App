@@ -72,6 +72,18 @@ const AllPost = () => {
     <div>
       {Auth.loggedIn() ? (
         <>
+          
+
+          <div class="relative bg-black">
+            <div class="container m-auto px-6 pt-32 md:px-12 lg:pt-[0.2rem] lg:px-8">
+              <div class="flex items-center flex-wrap px-2 md:px-0">
+                <div class="relative lg:w-6/12 lg:py-24 xl:py-32">
+                <h1 class="font-bold text-4xl text-white md:text-5xl lg:w-10/12">Add your Spotify links, get feedback</h1>
+            </div>
+            </div>
+            </div>
+          </div>
+
           <p
             className={`m-0 ${
               characterCount === 280 || error ? "text-danger" : ""
@@ -79,24 +91,26 @@ const AllPost = () => {
           >
             Character Count: {characterCount}/280
           </p>
+          
           <form
             className="flex-row justify-center justify-space-between-md align-center"
+            class=""
             onSubmit={handleFormSubmit}
           >
-            <div className="col-12 col-lg-9">
+            <div className="col-12 col-lg-9 relative flex p-1 rounded-full bg-white border border-yellow-200 shadow-md md:p-2">
               <textarea
                 name="postText"
-                placeholder="Here's a new post..."
                 value={postText}
-                className="form-input w-100"
+                className="form-input w-100 w-full p-4 rounded-full"
+                placeholder="Your Spotify link here"
                 style={{ lineHeight: "1.5", resize: "vertical" }}
                 onChange={handleChange}
               ></textarea>
             </div>
 
             <div className="col-12 col-lg-3">
-              <button className="btn btn-primary btn-block py-3" type="submit">
-                Add POST
+              <button className="btn btn-block py-3 w-100 ml-auto px-3 rounded-full text-center transition bg-gradient-to-b from-yellow-200 to-green-500 hover:to-green-800 active:from-green-400 focus:from-red-400 md:px-1" type="submit">
+                Add Post
               </button>
             </div>
             {error && (
