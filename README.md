@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# Spotify Social
+
+This is a social app for users of Spotify to share their favourite tracks, discover new tunes and join discussions on tracks.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Inspiration
 
-In the project directory, you can run:
+This is a project for our bootcamp with Birmingham University. We wanted to do something that incorporated the Spotify Api, to make an interactive application that is accessible to Spotify users. We worked as a team of 3, and started with the back end, which we tested using Graphql. 
 
-### `npm start`
+## User Journey
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+As a user... 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Challenges
 
-### `npm test`
+Getting the oEmbed to work
+Displaying the cards using Tailwind
+Working with Graphql and testing all the mutations
+Posting and deleting comments
+The Spotify Api - couldn't get it to work with Graphql
+
+## Future development
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Technology used
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+We use the following technologies in the app:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **[React](https://reactjs.org/)** - For the frontend of the app. React is a JavaScript library for building user interfaces.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- [GraphQL](https://graphql.org/) - For the backend of the app. GraphQL is a query language for APIs and databases.
 
-### `npm run eject`
+- [Apollo](https://www.apollographql.com/) - For the backend of the app. Apollo is a GraphQL client for React.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- [tailwindcss](https://tailwindcss.com/) - For the styling of the app. Tailwindcss is a utility-first CSS framework for quickly building custom components.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [bcrypt](https://www.npmjs.com/package/bcrypt) - For the hashing of the passwords of the users. Bcrypt is a password hashing library.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- [express](https://expressjs.com/) - For the backend of the app -  used for the authentication of the users. Express is a web application framework for Node.js.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- [mongoose](https://mongoosejs.com/) - For the backend of the app. Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment.
 
-## Learn More
+- [jwt](https://www.npmjs.com/package/jsonwebtoken) For the authentication of the users. Jwt is a JSON Web Token library. It is used for the authentication of the users.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [dotenv](https://www.npmjs.com/package/dotenv) - for the configuration of the app -   used for the authentication of the users. Dotenv is a library for loading environment variables from a .env file into process.env.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [nodemon](https://www.npmjs.com/package/nodemon) - for the restart of the app. Nodemon is a utility for restarting the server when files change. It is used for the restart of the app. 
 
-### Code Splitting
+- [appollo-server-express](https://www.npmjs.com/package/apollo-server-express) - for the backend of the app. Apollo-server-express is a GraphQL server for Express.    It is used for the backend of the app.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+## Contributors
+Jag Tiwana: https://github.com/jtiwana-git
+Carla Brown: https://github.com/misscbrown
+Farhiya Mahamud: https://github.com/Farhiya1
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+## oEmbed
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+We used oEmbed to embed the Spotify URL's in this application. Each embed provides a 30 second preview clip.
 
-### Advanced Configuration
+https://developer.spotify.com/documentation/embeds/guides/using-the-oembed-api/
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+## Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+https://shielded-beyond-91832.herokuapp.com/
 
-### `npm run build` fails to minify
+## Screenshots
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
