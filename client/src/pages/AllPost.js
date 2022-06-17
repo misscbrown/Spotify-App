@@ -7,6 +7,7 @@ import { ADD_POST } from "../utils/mutations";
 import { QUERY_ALL_POSTS, QUERY_ME } from "../utils/queries";
 import Auth from "../utils/auth.js";
 import PostCard from "../components/PostCard";
+import Navbar from "../components/Navbar";
 
 const AllPost = () => {
   const [postText, setpostText] = useState("");
@@ -27,15 +28,6 @@ const AllPost = () => {
       } catch (e) {
         console.error(e);
       }
-
-      // // update me object's cache
-      // const meCacheRead = cache.readQuery({ query: QUERY_ME });
-
-      // const { me } = meCacheRead;
-      // cache.writeQuery({
-      //   query: QUERY_ME,
-      //   data: { me: { ...me, posts: [...me.posts, addPost] } },
-      // });
     },
   });
 
@@ -69,14 +61,10 @@ const AllPost = () => {
   };
 
   return (
-    <div>
+    <div className="">
+      <Navbar />
       {Auth.loggedIn() ? (
         <>
-          <div class="relative bg-white">
-            <h1 class="font-bold text-4xl text-black md:text-5xl lg:w-10/12">
-              Add Spotify links and join the conversation!
-            </h1>
-          </div>
           <br></br>
 
           <p
@@ -124,13 +112,11 @@ const AllPost = () => {
           <Link to="/signup">signup.</Link>
         </p>
       )}
-
-      {/* <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-4"> */}
-      <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-4 ">
+      <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4 ">
         {data && data.getAllPosts.map((post) => <PostCard post={post} />)}
       </div>
+      //{" "}
     </div>
-    // </div>
   );
 };
 
