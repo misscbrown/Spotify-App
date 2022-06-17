@@ -37,12 +37,12 @@
   transition: 0.5s background ease;
 } */
 
-.container {
+/* .container {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-}
+} */
 
 
 /* a {
@@ -56,7 +56,7 @@
 
 
 /* Set a style for all buttons */
-.submit-btn {
+/* .submit-btn {
   
   
   padding: 14px 20px;
@@ -65,7 +65,7 @@
   cursor: pointer;
   width: 100%;
   opacity: 0.9;
-}
+} */
 
 /* .submit-btnver {
   opacity:1;
