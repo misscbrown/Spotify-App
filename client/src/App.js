@@ -10,9 +10,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Dashboard from "./pages/Dashboard";
 import AllPost from "./pages/AllPost";
-import Navbar from "./components/Navbar";
 import Homepage from "./pages/Homepage";
-// import Header from "./components/Header";
+import Footer from "./components/Footer";
+import auth from "./utils/auth";
 
 import "./App.css";
 import "./App.js";
@@ -20,14 +20,13 @@ import "./index.css";
 import LoginForm from "./components/LoginForm";
 import SignupForm from "./components/SignupForm";
 
-import Spotify from "./components/Spotify";
-
 const httpLink = createHttpLink({
   uri: "/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem("id_token");
+  const isAuth = auth;
 
   return {
     headers: {
@@ -46,22 +45,17 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        {/* <Header /> */}
-        <Navbar />
-
         <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/allPosts" element={<AllPost />} />
-
-          <Route path="/signup" element={<SignupForm />} />
-          <Route path="/login" element={<LoginForm />} />
-          {/* 
-          <Route
-            path="*"
-            element={<h1 className="display-2">Wrong page!</h1>}
-          /> */}
+          <>
+            <Route path="/" element={<Homepage />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/allPosts" element={<AllPost />} />
+            <Route path="/signup" element={<SignupForm />} />
+            <Route path="/login" element={<LoginForm />} />
+          </>
         </Routes>
+
+        <Footer />
       </Router>
     </ApolloProvider>
   );
