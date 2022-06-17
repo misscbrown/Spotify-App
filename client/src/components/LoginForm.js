@@ -61,7 +61,7 @@ const LoginForm = () => {
     <main className="flex-row justify-center mb-4">
       <div
         className="relative py-16
-        before:absolute before:inset-0 before:w-full before:h-[120%] before:bg-black"
+        before:absolute before:inset-0 before:w-full before:h-[120%] before:bg-white"
       >
         <div className="relative container m-auto px-6 text-gray-500 md:px-12 xl:px-40">
           <div class="rounded-xl border bg-opacity-100 backdrop-blur-2xl bg-white shadow-xl">

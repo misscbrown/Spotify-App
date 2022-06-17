@@ -18,9 +18,11 @@ const PostCard = ({ post }) => {
 
   //use tailwind to display the post and the comments, as well as an input field to add a new comment
   return (
-    <section className="border border-solid border-black my-2">
+    <section className="max-w-sm rounded overflow-hidden shadow-lg border border-solid border-black my-2">
+      
+      
       <h4 className="text-gray-500 text-xl">
-        <span className="text-gray-300 text-sm">username: </span>
+        <span className="text-gray-900 text-sm">Username: </span>
         {post.username}
         <p className="text-gray-300 text-sm">at: {post.createdAt} </p>
       </h4>
@@ -41,7 +43,7 @@ const PostCard = ({ post }) => {
       </aside>
       <form className="flex flex-col" onSubmit={handleSubmit}>
         <input
-          className="border border-solid border-black"
+          className="form-input w-100 w-full p-3 rounded-full border border-solid border-black"
           type="text"
           placeholder="Add a comment"
         />
@@ -50,11 +52,13 @@ const PostCard = ({ post }) => {
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="py-3 w-full ml-auto px-3 rounded-full text-center transition bg-gradient-to-b from-yellow-200 to-green-500 hover:to-green-800 active:from-green-400 focus:from-red-400 md:px-1"
         >
           Add Comment
         </button>
       </form>
+
+
     </section>
   );
 };

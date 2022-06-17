@@ -1,14 +1,23 @@
+import { Center } from "@chakra-ui/react";
 import React from "react";
 import { Link } from "react-router-dom";
-
+import image from "../assets/dashboard.png";
 import Auth from "../utils/auth.js";
 
-// import Spotify from "react-spotify-embed"
-
 const Dashboard = () => {
+  const loggedIn = (event) => {
+    event.preventDefault();
+    Auth.loggedin();
+  };
   return (
     <div>
-      {/* <Spotify link="https://open.spotify.com/track/44JSreJxvgl3CxLo5MoQL0"/> */}
+      <h1 className="text-center text-5xl">
+        {Auth.getProfile().data.username}
+      </h1>
+      <h2 className="text-center text-3xl">Bio</h2>
+      <div className="w-7/12">
+        <img className="" src={image} />
+      </div>
     </div>
   );
 };
