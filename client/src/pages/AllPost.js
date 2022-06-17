@@ -74,7 +74,7 @@ const AllPost = () => {
         <>
           <div class="relative bg-white">
             <h1 class="font-bold text-4xl text-black md:text-5xl lg:w-10/12">
-              Add your Spotify links and get feedback!
+              Add Spotify links and join the conversation!
             </h1>
           </div>
           <br></br>
