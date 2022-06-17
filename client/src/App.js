@@ -12,7 +12,7 @@ import Dashboard from "./pages/Dashboard";
 import AllPost from "./pages/AllPost";
 import Navbar from "./components/Navbar";
 import Homepage from "./pages/Homepage";
-import Header from "./components/Header";
+// import Header from "./components/Header";
 
 import "./App.css";
 import "./App.js";
@@ -46,7 +46,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <Header />
+        {/* <Header /> */}
         <Navbar />
 
         <Routes>
