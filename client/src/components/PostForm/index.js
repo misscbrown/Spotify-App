@@ -66,21 +66,25 @@ const PostForm = () => {
 
       {Auth.loggedIn() ? (
         <>
+          
+         
           <p
             className={`m-0 ${
               characterCount === 280 || error ? 'text-danger' : ''
             }`}
           >
-            Character Count: {characterCount}/280
+            Character Count: {characterCount}/280 
           </p>
+
           <form
             className="flex-row justify-center justify-space-between-md align-center"
+            
             onSubmit={handleFormSubmit}
           >
             <div className="col-12 col-lg-9">
               <textarea
                 name="postText"
-                placeholder="Here's a new post..."
+                placeholder="Here's another new post..."
                 value={postText}
                 className="form-input w-100"
                 style={{ lineHeight: '1.5', resize: 'vertical' }}
@@ -107,6 +111,8 @@ const PostForm = () => {
         </p>
       )}
     </div>
+  
+    
   );
 };
 
