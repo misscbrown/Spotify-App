@@ -22,9 +22,9 @@ WHEN I have signed up / logged in THEN I am presented with my dashboard with my 
 
 WHEN I am signed in THEN I have the option to navigate to the all post page to view all the current music posts that exist and posted by other existing users. You also have the ability to leave a comment under that post.
 
-WHEN I am on the all post page Then I am given the option to post a music link that other users can listen to and reply to by leaving a comment on your post.
+WHEN I am on the all post page THEN I am given the option to post a music link that other users can listen to and reply to by leaving a comment on your post.
 
-WHEN I have craeted a post Then I have the ability to delete that post.`
+WHEN I have craeted a post THEN I have the ability to delete that post.`
 
 ## Challenges
 
